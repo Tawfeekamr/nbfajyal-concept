@@ -1,0 +1,200 @@
+/* ============================================================
+   NBF Ajyal — Design Tokens
+   Revolut-inspired design system with NBF Green accent
+   ============================================================ */
+
+:root {
+  /* Colors — Primary */
+  --color-dark: #191c1f;
+  --color-white: #ffffff;
+  --color-surface: #f4f4f4;
+  --color-green: #006633;
+  --color-green-hover: #004d26;
+  --color-green-light: #00a87e;
+
+  /* Colors — Text */
+  --color-text-primary: #191c1f;
+  --color-text-secondary: #505a63;
+  --color-text-muted: #8d969e;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-green: #ffffff;
+
+  /* Colors — Semantic */
+  --color-danger: #e23b4a;
+  --color-success: #00a87e;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  --space-5xl: 120px;
+
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 72px;
+
+  /* Border Radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+details summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ============================================================
+   Base Typography
+   ============================================================ */
+
+.section-title {
+  font-size: 48px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.21;
+  letter-spacing: -0.96px;
+  text-align: center;
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+}
+
+.section-subtitle {
+  font-size: 18px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.56;
+  color: var(--color-text-secondary);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto var(--space-3xl);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background-color: var(--color-green);
+  color: var(--color-text-on-green);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-green-hover);
+}
+
+.btn--dark {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.btn--dark:hover {
+  opacity: 0.85;
+}
+
+.btn--outlined {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+}
+
+.btn--outlined:hover {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border-color: var(--color-dark);
+}
+
+.btn--ghost {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn--ghost:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn--white {
+  background-color: var(--color-white);
+  color: var(--color-green);
+}
+
+.btn--white:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
