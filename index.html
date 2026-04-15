@@ -12,7 +12,304 @@
 </head>
 <body>
 
-  <!-- Sections will be added here -->
+  <!-- ========== 1. NAVIGATION ========== -->
+  <header class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-nbf">NBF</span>
+        <span class="nav__logo-ajyal">Ajyal</span>
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#benefits" class="nav__link">Benefits</a>
+        <a href="#products" class="nav__link">Products</a>
+        <a href="#how-it-works" class="nav__link">How It Works</a>
+        <a href="#faqs" class="nav__link">FAQs</a>
+      </nav>
+      <a href="#cta" class="btn btn--primary nav__cta">Open Account</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== 2. HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <h1 class="hero__title">Banking Made Simple</h1>
+        <p class="hero__subtitle">No minimum salary. No minimum balance. Just open your account and start banking.</p>
+        <div class="hero__actions">
+          <a href="#cta" class="btn btn--primary">Open Your Account</a>
+          <a href="#products" class="btn btn--outlined">Explore Products</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__visual-inner">
+          <div class="hero__card hero__card--1"></div>
+          <div class="hero__card hero__card--2"></div>
+          <div class="hero__card hero__card--3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. BENEFITS ========== -->
+  <section class="benefits" id="benefits">
+    <div class="benefits__container">
+      <h2 class="section-title">Why NBF Ajyal?</h2>
+      <p class="section-subtitle">Everything you need from a bank, with nothing you don't.</p>
+      <div class="benefits__grid">
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="landmark"></i>
+          </div>
+          <h3 class="benefit-card__title">6,000+ Free ATMs</h3>
+          <p class="benefit-card__desc">Withdraw cash anywhere in the UAE, completely fee-free.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="smartphone"></i>
+          </div>
+          <h3 class="benefit-card__title">Digital Banking</h3>
+          <p class="benefit-card__desc">Full control from your phone, 24/7 banking at your fingertips.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="percent"></i>
+          </div>
+          <h3 class="benefit-card__title">2% Cashback</h3>
+          <p class="benefit-card__desc">Earn cashback on all your everyday spending.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="car"></i>
+          </div>
+          <h3 class="benefit-card__title">Auto Loans from 2.2%</h3>
+          <p class="benefit-card__desc">Drive your dream car with competitive rates starting at 2.2% p.a.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="film"></i>
+          </div>
+          <h3 class="benefit-card__title">60% Off Movies</h3>
+          <p class="benefit-card__desc">Enjoy the best entertainment for less with exclusive discounts.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <i data-lucide="piggy-bank"></i>
+          </div>
+          <h3 class="benefit-card__title">Savings Made Easy</h3>
+          <p class="benefit-card__desc">Start saving with no minimum balance required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. PRODUCTS ========== -->
+  <section class="products" id="products">
+    <div class="products__container">
+      <h2 class="section-title">Products Built for You</h2>
+      <p class="section-subtitle">Simple, transparent financial products with no hidden fees.</p>
+      <div class="products__grid">
+        <div class="product-card">
+          <div class="product-card__icon">
+            <i data-lucide="wallet"></i>
+          </div>
+          <span class="product-card__tag">No minimum balance</span>
+          <h3 class="product-card__title">Current Account</h3>
+          <p class="product-card__desc">A simple account that works for everyone. No barriers, no hidden fees.</p>
+          <a href="#cta" class="btn btn--ghost">Learn More</a>
+        </div>
+        <div class="product-card">
+          <div class="product-card__icon">
+            <i data-lucide="car"></i>
+          </div>
+          <span class="product-card__tag">From 2.2% p.a.</span>
+          <h3 class="product-card__title">Auto Loan</h3>
+          <p class="product-card__desc">Finance your car with competitive rates and flexible repayment terms.</p>
+          <a href="#cta" class="btn btn--ghost">Learn More</a>
+        </div>
+        <div class="product-card">
+          <div class="product-card__icon">
+            <i data-lucide="banknote"></i>
+          </div>
+          <span class="product-card__tag">Up to AED 150,000</span>
+          <h3 class="product-card__title">Personal Loan</h3>
+          <p class="product-card__desc">Get the funds you need with transparent terms and fast approval.</p>
+          <a href="#cta" class="btn btn--ghost">Learn More</a>
+        </div>
+        <div class="product-card">
+          <div class="product-card__icon">
+            <i data-lucide="credit-card"></i>
+          </div>
+          <span class="product-card__tag">Cashback + discounts</span>
+          <h3 class="product-card__title">Credit Card</h3>
+          <p class="product-card__desc">Earn rewards on every purchase and enjoy exclusive entertainment offers.</p>
+          <a href="#cta" class="btn btn--ghost">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. HOW IT WORKS ========== -->
+  <section class="steps" id="how-it-works">
+    <div class="steps__container">
+      <h2 class="section-title">Get Started in 3 Steps</h2>
+      <p class="section-subtitle">Opening your account takes minutes, not days.</p>
+      <div class="steps__grid">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__icon">
+            <i data-lucide="download"></i>
+          </div>
+          <h3 class="step__title">Download the App</h3>
+          <p class="step__desc">Get the NBF Instant App from your app store.</p>
+        </div>
+        <div class="step__connector"></div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__icon">
+            <i data-lucide="scan"></i>
+          </div>
+          <h3 class="step__title">Scan Your Emirates ID</h3>
+          <p class="step__desc">Take a selfie and scan your Emirates ID — that's it.</p>
+        </div>
+        <div class="step__connector"></div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__icon">
+            <i data-lucide="rocket"></i>
+          </div>
+          <h3 class="step__title">Start Banking</h3>
+          <p class="step__desc">Your welcome pack is delivered to your door.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. STATS ========== -->
+  <section class="stats" id="stats">
+    <div class="stats__container">
+      <div class="stat">
+        <span class="stat__number">6,000+</span>
+        <span class="stat__label">ATMs across the UAE</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number">60%</span>
+        <span class="stat__label">Off movie tickets</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number">2%</span>
+        <span class="stat__label">Cashback on spending</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number">2.2%</span>
+        <span class="stat__label">Auto loan rates</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7. FAQ ========== -->
+  <section class="faq" id="faqs">
+    <div class="faq__container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Got questions? We've got answers.</p>
+      <div class="faq__list">
+        <details class="faq__item">
+          <summary class="faq__question">Who can open an NBF Ajyal account?</summary>
+          <div class="faq__answer">Any UAE resident with a valid Emirates ID can open an NBF Ajyal account. There's no nationality restriction — the account is designed for all low-income individuals earning less than AED 5,000 per month.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">What is the minimum salary requirement?</summary>
+          <div class="faq__answer">There is no minimum salary requirement to open an NBF Ajyal account. That's what makes it different — it's built for everyone, regardless of income level.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">What documents do I need?</summary>
+          <div class="faq__answer">All you need is a valid Emirates ID. The NBF Instant App will guide you through scanning it with your phone camera.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">How do I open an account?</summary>
+          <div class="faq__answer">Download the NBF Instant App, take a selfie, scan your Emirates ID, and your welcome pack will be delivered to your door. The entire process takes just a few minutes.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Is there a minimum balance?</summary>
+          <div class="faq__answer">No. There is no minimum balance required for an NBF Ajyal account. Keep as much or as little as you need.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">What is the NBF Instant App?</summary>
+          <div class="faq__answer">The NBF Instant App is our mobile banking app that lets you open an account entirely from your phone. Take a selfie, scan your Emirates ID, and you're done.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">How does the cashback work?</summary>
+          <div class="faq__answer">You earn 2% cashback on all your everyday spending with your NBF Ajyal card. The cashback is automatically credited to your account.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Can I apply for a loan with NBF Ajyal?</summary>
+          <div class="faq__answer">Yes. NBF Ajyal offers auto loans starting at 2.2% p.a. and personal loans up to AED 150,000 with flexible repayment terms.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Are there any hidden fees?</summary>
+          <div class="faq__answer">No hidden fees. NBF Ajyal is designed to be transparent — what you see is what you get. No minimum balance charges, no surprise deductions.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">How do I contact customer support?</summary>
+          <div class="faq__answer">You can reach NBF customer support through the NBF Instant App, by calling our helpline, or by visiting any NBF branch across the UAE.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. CTA ========== -->
+  <section class="cta" id="cta">
+    <div class="cta__container">
+      <h2 class="cta__title">Ready to Start Banking?</h2>
+      <p class="cta__subtitle">Open your account in minutes. No minimum salary required.</p>
+      <a href="#" class="btn btn--white">Open Your Account</a>
+    </div>
+  </section>
+
+  <!-- ========== 9. FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="nav__logo-nbf">NBF</span>
+            <span class="nav__logo-ajyal">Ajyal</span>
+          </div>
+          <p class="footer__tagline">Banking made simple for everyone in the UAE.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Quick Links</h4>
+          <a href="#benefits" class="footer__link">Benefits</a>
+          <a href="#products" class="footer__link">Products</a>
+          <a href="#how-it-works" class="footer__link">How It Works</a>
+          <a href="#faqs" class="footer__link">FAQs</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Legal</h4>
+          <a href="#" class="footer__link">Terms & Conditions</a>
+          <a href="#" class="footer__link">Privacy Policy</a>
+          <a href="#" class="footer__link">Disclosures</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Connect</h4>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" class="footer__social-link" aria-label="Linkedin"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 National Bank of Fujairah. All rights reserved.</p>
+        <p class="footer__disclaimer">NBF Ajyal is a product of National Bank of Fujairah. Licensed by the Central Bank of the UAE.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="js/main.js"></script>
