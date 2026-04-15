@@ -829,3 +829,262 @@ details summary::-webkit-details-marker {
 .footer__disclaimer {
   margin-top: var(--space-sm);
 }
+
+/* ============================================================
+   Responsive — Tablet (max-width: 1024px)
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .section-title {
+    font-size: 36px;
+    letter-spacing: -0.72px;
+  }
+
+  .hero__title {
+    font-size: 56px;
+    letter-spacing: -1.12px;
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats__container {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    flex: 1 1 40%;
+  }
+
+  .stat__number {
+    font-size: 40px;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .hero__container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__visual {
+    min-height: 280px;
+  }
+
+  .hero__visual-inner {
+    width: 260px;
+    height: 300px;
+  }
+}
+
+/* ============================================================
+   Responsive — Mobile (max-width: 720px)
+   ============================================================ */
+
+@media (max-width: 720px) {
+  :root {
+    --nav-height: 64px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    letter-spacing: -0.56px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Navigation mobile */
+  .nav__links {
+    display: none;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-white);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    z-index: 999;
+  }
+
+  .nav__links--open {
+    display: flex;
+  }
+
+  .nav__link {
+    font-size: 20px;
+  }
+
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__toggle--open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav__toggle--open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav__toggle--open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Hero mobile */
+  .hero {
+    padding-top: calc(var(--nav-height) + var(--space-xl));
+    padding-bottom: var(--space-xl);
+  }
+
+  .hero__title {
+    font-size: 36px;
+    letter-spacing: -0.72px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero__visual {
+    min-height: 200px;
+  }
+
+  .hero__visual-inner {
+    width: 200px;
+    height: 240px;
+  }
+
+  .hero__card {
+    width: 150px;
+    height: 200px;
+  }
+
+  /* Benefits mobile */
+  .benefits {
+    padding: var(--space-xl) 0;
+  }
+
+  .benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Products mobile */
+  .products {
+    padding: var(--space-xl) 0;
+  }
+
+  .products__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Steps mobile */
+  .steps {
+    padding: var(--space-xl) 0;
+  }
+
+  .steps__grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step__connector {
+    width: 2px;
+    height: 40px;
+    margin-top: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--color-text-muted) 0,
+      var(--color-text-muted) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+
+  /* Stats mobile */
+  .stats {
+    padding: var(--space-xl) 0;
+  }
+
+  .stats__container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .stat__number {
+    font-size: 36px;
+  }
+
+  /* FAQ mobile */
+  .faq {
+    padding: var(--space-xl) 0;
+  }
+
+  .faq__question {
+    font-size: 16px;
+  }
+
+  .faq__answer {
+    font-size: 14px;
+  }
+
+  /* CTA mobile */
+  .cta {
+    padding: var(--space-xl) 0;
+  }
+
+  .cta__title {
+    font-size: 28px;
+    letter-spacing: -0.56px;
+  }
+
+  .cta__subtitle {
+    font-size: 16px;
+  }
+
+  /* Footer mobile */
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer__social {
+    justify-content: flex-start;
+  }
+}
