@@ -327,17 +327,55 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Animate the gallery header separately
-    gsap.from(".gallery__header", {
-      scrollTrigger: {
-        trigger: ".gallery",
-        start: "top 80%"
-      },
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    });
+    // ---- Gallery Bento Grid Scroll Animation ----
+    const galleryElement = document.querySelector("#gallery-8");
+    if (galleryElement && window.Flip) {
+      let flipCtx;
+      const galleryItems = galleryElement.querySelectorAll(".gallery__item");
+
+      const createGalleryTween = () => {
+        flipCtx && flipCtx.revert();
+        galleryElement.classList.remove("gallery--final");
+
+        flipCtx = gsap.context(() => {
+          galleryElement.classList.add("gallery--final");
+          const flipState = Flip.getState(galleryItems);
+          galleryElement.classList.remove("gallery--final");
+
+          const flip = Flip.to(flipState, {
+            simple: true,
+            ease: "expoScale(1, 5)"
+          });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: galleryElement,
+              start: "center center",
+              end: "+=100%",
+              scrub: true,
+              pin: galleryElement.parentNode
+            }
+          });
+          tl.add(flip);
+          return () => gsap.set(galleryItems, { clearProps: "all" });
+        });
+      };
+
+      createGalleryTween();
+      window.addEventListener("resize", createGalleryTween);
+
+      // Animate the gallery header separately
+      gsap.from(".gallery__header", {
+        scrollTrigger: {
+          trigger: ".gallery-section",
+          start: "top 80%"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+    }
   }
 
   // ---- Initialize Lucide Icons (at end, after all DOM setup) ----
