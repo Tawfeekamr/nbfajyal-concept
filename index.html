@@ -20,11 +20,29 @@
   <header class="nav" id="nav">
     <div class="nav__container">
       <a href="#" class="nav__logo">
-        <span class="nav__logo-nbf">NBF</span>
-        <span class="nav__logo-ajyal">Ajyal</span>
+        <img src="assets/logos/nbf-ajyal-logo-themed.png" alt="NBF Ajyal Logo" class="nav__logo-img">
       </a>
       <nav class="nav__links" id="navLinks">
         <a href="#benefits" class="nav__link">Benefits</a>
+        <div class="nav__item nav__item--has-dropdown">
+          <a href="#gallery" class="nav__link">Cards</a>
+          <div class="nav__dropdown">
+            <div class="nav__dropdown-grid">
+              <div class="nav__dropdown-card">
+                <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Infinite-Credit-Card-scaled.png" alt="Infinite Card">
+                <span>Islamic Infinite</span>
+              </div>
+              <div class="nav__dropdown-card">
+                <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Platinum-Debit-Card-scaled.png" alt="Platinum Card">
+                <span>Islamic Platinum</span>
+              </div>
+              <div class="nav__dropdown-card">
+                <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Classic-Debit-Card-scaled.png" alt="Classic Card">
+                <span>Islamic Classic</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <a href="#products" class="nav__link">Products</a>
         <a href="#how-it-works" class="nav__link">How It Works</a>
         <a href="#faqs" class="nav__link">FAQs</a>
@@ -102,8 +120,8 @@
             <h3 class="benefit-card__title">Bank in your pocket</h3>
             <p class="benefit-card__desc">Complete control from the NBF Instant App. Scan your ID, take a selfie, and you're in. Banking has never been this fast.</p>
             <div class="benefit-card__visual">
-               <!-- Placeholder for subtle app UI snippet -->
-               <div class="app-ui-mini"></div>
+               <!-- Subtle app UI snippet -->
+               <img src="assets/images/New-NBF-Direct-App-web-Banner-02.jpg" alt="NBF Direct App" class="benefit-card__img">
             </div>
           </div>
         </div>
@@ -124,20 +142,20 @@
           <p class="benefit-card__desc">6,000+ locations across UAE.</p>
         </div>
 
-        <div class="benefit-card benefit-card--small reveal reveal--delay-3">
-          <div class="benefit-card__icon">
-            <i data-lucide="film"></i>
-          </div>
-          <h3 class="benefit-card__title">60% Off Movies</h3>
-          <p class="benefit-card__desc">Cinema nights just got cheaper.</p>
-        </div>
-
         <div class="benefit-card benefit-card--medium reveal reveal--delay-1">
           <div class="benefit-card__icon">
             <i data-lucide="car"></i>
           </div>
           <h3 class="benefit-card__title">Auto Loans from 2.2%</h3>
           <p class="benefit-card__desc">The keys to your dream car are closer than you think.</p>
+        </div>
+
+        <div class="benefit-card benefit-card--small reveal reveal--delay-3">
+          <div class="benefit-card__icon">
+            <i data-lucide="film"></i>
+          </div>
+          <h3 class="benefit-card__title">60% Off Movies</h3>
+          <p class="benefit-card__desc">Cinema nights just got cheaper.</p>
         </div>
       </div>
     </div>
@@ -146,34 +164,66 @@
   <!-- ========== GALLERY ========== -->
   <section class="gallery-section" id="gallery">
     <div class="gallery__header reveal">
-      <h2 class="section-title">Built for Your Lifestyle</h2>
-      <p class="section-subtitle">From everyday spending to big moments — NBF Ajyal fits your life.</p>
+      <h2 class="section-title">Our Cards</h2>
+      <p class="section-subtitle">Choose the card that fits your lifestyle — from everyday spending to premium perks.</p>
     </div>
     <div class="gallery-wrap">
       <div class="gallery gallery--bento" id="gallery-8">
-        <div class="gallery__item" style="background: linear-gradient(135deg, #CCFF00 0%, #00E676 100%);">
-          <div class="gallery__overlay"><span>No Minimum Balance</span></div>
+        <div class="gallery__item gallery__item--nbf-lime">
+          <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Infinite-Credit-Card-scaled.png" alt="NBF Islamic Infinite Credit Card" />
+          <div class="gallery__overlay">
+            <span>Islamic Infinite Credit</span>
+            <p>Our most prestigious card — 10% dining cashback, lounge access, 24/7 concierge.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #0D0F12 0%, #1a2332 100%);">
-          <div class="gallery__overlay"><span>Digital Onboarding</span></div>
+        <div class="gallery__item gallery__item--skyfall">
+          <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Platinum-Debit-Card-scaled.png" alt="NBF Islamic Platinum Debit Card" />
+          <div class="gallery__overlay">
+            <span>Islamic Platinum Debit</span>
+            <p>Premium service, exclusive benefits and worldwide acceptance.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #15181C 0%, #0D0F12 100%);">
-          <div class="gallery__overlay"><span>6,000+ Free ATMs</span></div>
+        <div class="gallery__item gallery__item--purple-haze">
+          <img src="examples/cards/NBF_All-Cards_NBF-Islamic-Classic-Debit-Card-scaled.png" alt="NBF Islamic Classic Debit Card" />
+          <div class="gallery__overlay">
+            <span>Islamic Classic Debit</span>
+            <p>Effortless spending backed by trusted security and free UAE ATMs.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #00E676 0%, #CCFF00 100%);">
-          <div class="gallery__overlay"><span>2% Cashback</span></div>
+        <div class="gallery__item gallery__item--macha">
+          <img src="examples/cards/NBF__Infinite-Credit-Card.png" alt="NBF Infinite Credit Card" />
+          <div class="gallery__overlay">
+            <span>Infinite Credit Card</span>
+            <p>Unlimited lounge access, travel insurance, and 2% unlimited cashback.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #1a2332 0%, #0D0F12 100%);">
-          <div class="gallery__overlay"><span>Instant App</span></div>
+        <div class="gallery__item gallery__item--emerald-city">
+          <img src="examples/cards/NBF__Platinum-Exclusive-Credit-Card.png" alt="NBF Platinum Exclusive Credit Card" />
+          <div class="gallery__overlay">
+            <span>Platinum Exclusive</span>
+            <p>Premium rewards, merchant discounts, and lifestyle offers.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #CCFF00 0%, #0D0F12 100%);">
-          <div class="gallery__overlay"><span>60% Off Movies</span></div>
+        <div class="gallery__item gallery__item--orange-crush">
+          <img src="examples/cards/NBF__Platinum-Debit-Card.png" alt="NBF Platinum Debit Card" />
+          <div class="gallery__overlay">
+            <span>Platinum Debit</span>
+            <p>High daily limits, Apple & Google Pay, fee-free international spending.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #0D0F12 0%, #15181C 100%);">
-          <div class="gallery__overlay"><span>Auto Loans 2.2%</span></div>
+        <div class="gallery__item gallery__item--lipstick">
+          <img src="examples/cards/NBF__Classic-Credit-Card.png" alt="NBF Classic Credit Card" />
+          <div class="gallery__overlay">
+            <span>Classic Credit Card</span>
+            <p>Everyday essentials — simple, reliable, and widely accepted.</p>
+          </div>
         </div>
-        <div class="gallery__item" style="background: linear-gradient(135deg, #00E676 0%, #0D0F12 100%);">
-          <div class="gallery__overlay"><span>Welcome Pack</span></div>
+        <div class="gallery__item gallery__item--summer-fair">
+          <img src="examples/cards/NBF__Classic-Debit-Card.png" alt="NBF Classic Debit Card" />
+          <div class="gallery__overlay">
+            <span>Classic Debit</span>
+            <p>Direct access to your funds with no frills, no fees.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -186,40 +236,72 @@
       <p class="section-subtitle reveal reveal--delay-1">Simple, transparent financial products with no hidden fees.</p>
       <div class="products__grid">
         <div class="product-card reveal">
-          <div class="product-card__icon">
-            <i data-lucide="wallet"></i>
+          <div class="product-card__accent"></div>
+          <div class="product-card__top">
+            <div class="product-card__icon">
+              <i data-lucide="wallet"></i>
+            </div>
+            <span class="product-card__tag">No minimum balance</span>
           </div>
-          <span class="product-card__tag">No minimum balance</span>
-          <h3 class="product-card__title">Account</h3>
-          <p class="product-card__desc">A simple account that works for everyone. No barriers, no hidden fees.</p>
-          <a href="#cta" class="btn btn--ghost">Learn More</a>
+          <h3 class="product-card__title">Savings Account</h3>
+          <p class="product-card__desc">A simple account that works for everyone. No barriers, no hidden fees — just pure banking freedom.</p>
+          <ul class="product-card__features">
+            <li><i data-lucide="check"></i> Zero monthly fees</li>
+            <li><i data-lucide="check"></i> Free debit card</li>
+            <li><i data-lucide="check"></i> Instant transfers</li>
+          </ul>
+          <a href="#cta" class="btn btn--ghost product-card__cta">Learn More</a>
         </div>
         <div class="product-card reveal reveal--delay-1">
-          <div class="product-card__icon">
-            <i data-lucide="car"></i>
+          <div class="product-card__accent"></div>
+          <div class="product-card__top">
+            <div class="product-card__icon">
+              <i data-lucide="car"></i>
+            </div>
+            <span class="product-card__tag">From 2.2% p.a.</span>
           </div>
-          <span class="product-card__tag">From 2.2% p.a.</span>
           <h3 class="product-card__title">Auto Loan</h3>
-          <p class="product-card__desc">Finance your car with competitive rates and flexible repayment terms.</p>
-          <a href="#cta" class="btn btn--ghost">Learn More</a>
+          <p class="product-card__desc">Finance your car with competitive rates and flexible repayment terms up to 60 months.</p>
+          <ul class="product-card__features">
+            <li><i data-lucide="check"></i> Fast approval</li>
+            <li><i data-lucide="check"></i> Flexible tenure</li>
+            <li><i data-lucide="check"></i> New & used cars</li>
+          </ul>
+          <a href="#cta" class="btn btn--ghost product-card__cta">Learn More</a>
         </div>
         <div class="product-card reveal reveal--delay-2">
-          <div class="product-card__icon">
-            <i data-lucide="banknote"></i>
+          <div class="product-card__accent"></div>
+          <div class="product-card__top">
+            <div class="product-card__icon">
+              <i data-lucide="banknote"></i>
+            </div>
+            <span class="product-card__tag">Up to AED 150k</span>
           </div>
-          <span class="product-card__tag">Up to AED 150k</span>
           <h3 class="product-card__title">Personal Loan</h3>
-          <p class="product-card__desc">Get the funds you need with transparent terms and fast approval.</p>
-          <a href="#cta" class="btn btn--ghost">Learn More</a>
+          <p class="product-card__desc">Get the funds you need with transparent terms and fast approval — no surprises.</p>
+          <ul class="product-card__features">
+            <li><i data-lucide="check"></i> No salary transfer</li>
+            <li><i data-lucide="check"></i> Competitive rates</li>
+            <li><i data-lucide="check"></i> Quick disbursement</li>
+          </ul>
+          <a href="#cta" class="btn btn--ghost product-card__cta">Learn More</a>
         </div>
         <div class="product-card reveal reveal--delay-3">
-          <div class="product-card__icon">
-            <i data-lucide="credit-card"></i>
+          <div class="product-card__accent"></div>
+          <div class="product-card__top">
+            <div class="product-card__icon">
+              <i data-lucide="credit-card"></i>
+            </div>
+            <span class="product-card__tag">Cashback + discounts</span>
           </div>
-          <span class="product-card__tag">Cashback + discounts</span>
           <h3 class="product-card__title">Credit Card</h3>
-          <p class="product-card__desc">Earn rewards on every purchase and enjoy exclusive entertainment offers.</p>
-          <a href="#cta" class="btn btn--ghost">Learn More</a>
+          <p class="product-card__desc">Earn rewards on every purchase and enjoy exclusive entertainment offers across the UAE.</p>
+          <ul class="product-card__features">
+            <li><i data-lucide="check"></i> 2% unlimited cashback</li>
+            <li><i data-lucide="check"></i> 60% off cinema</li>
+            <li><i data-lucide="check"></i> Lounge access</li>
+          </ul>
+          <a href="#cta" class="btn btn--ghost product-card__cta">Learn More</a>
         </div>
       </div>
     </div>
@@ -289,43 +371,43 @@
       <h2 class="section-title reveal">FAQs</h2>
       <p class="section-subtitle reveal reveal--delay-1">Got questions? We've got answers.</p>
       <div class="faq__list reveal reveal--delay-2">
-        <details class="faq__item">
+        <details class="faq__item" data-icon="user-check">
           <summary class="faq__question">Who can open an NBF Ajyal account?</summary>
           <div class="faq__answer">Any UAE resident with a valid Emirates ID can open an NBF Ajyal account. There's no nationality restriction — the account is designed for all low-income individuals earning less than AED 5,000 per month.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="badge-indian-rupee">
           <summary class="faq__question">What is the minimum salary requirement?</summary>
           <div class="faq__answer">There is no minimum salary requirement to open an NBF Ajyal account. That's what makes it different — it's built for everyone, regardless of income level.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="scan-face">
           <summary class="faq__question">What documents do I need?</summary>
           <div class="faq__answer">All you need is a valid Emirates ID. The NBF Instant App will guide you through scanning it with your phone camera.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="smartphone">
           <summary class="faq__question">How do I open an account?</summary>
           <div class="faq__answer">Download the NBF Instant App, take a selfie, scan your Emirates ID, and your welcome pack will be delivered to your door. The entire process takes just a few minutes.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="wallet">
           <summary class="faq__question">Is there a minimum balance?</summary>
           <div class="faq__answer">No. There is no minimum balance required for an NBF Ajyal account. Keep as much or as little as you need.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="app-window">
           <summary class="faq__question">What is the NBF Instant App?</summary>
           <div class="faq__answer">The NBF Instant App is our mobile banking app that lets you open an account entirely from your phone. Take a selfie, scan your Emirates ID, and you're done.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="percent">
           <summary class="faq__question">How does the cashback work?</summary>
           <div class="faq__answer">You earn 2% cashback on all your everyday spending with your NBF Ajyal card. The cashback is automatically credited to your account.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="banknote">
           <summary class="faq__question">Can I apply for a loan with NBF Ajyal?</summary>
           <div class="faq__answer">Yes. NBF Ajyal offers auto loans starting at 2.2% p.a. and personal loans up to AED 150,000 with flexible repayment terms.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="shield-check">
           <summary class="faq__question">Are there any hidden fees?</summary>
           <div class="faq__answer">No hidden fees. NBF Ajyal is designed to be transparent — what you see is what you get. No minimum balance charges, no surprise deductions.</div>
         </details>
-        <details class="faq__item">
+        <details class="faq__item" data-icon="headphones">
           <summary class="faq__question">How do I contact customer support?</summary>
           <div class="faq__answer">You can reach NBF customer support through the NBF Instant App, by calling our helpline, or by visiting any NBF branch across the UAE.</div>
         </details>
@@ -342,48 +424,41 @@
     </div>
   </section>
 
-  <!-- ========== 8. GALLERY (SCRUBBED) ========== -->
-  <section class="gallery">
-    <div class="gallery__container">
-      <div class="gallery__header reveal">
-        <span class="section-tag">Digital Lifestyle</span>
-        <h2 class="section-title">Experience the <span>Future</span> ✦</h2>
-      </div>
-      
-      <div class="gallery__grid">
-        <div class="gallery__item gallery__item--wide">
-          <div class="gallery__img-box">
-             <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200" alt="Future" />
-          </div>
-          <div class="gallery__overlay">
-            <h3>Limitless Borderless Banking</h3>
-          </div>
+  <!-- ========== QUICK LINKS ========== -->
+  <section class="quick-links" id="quick-links">
+    <div class="quick-links__container reveal">
+      <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="quick-link-card">
+        <div class="quick-link-card__icon">
+          <i data-lucide="smartphone"></i>
         </div>
-        <div class="gallery__item">
-          <div class="gallery__img-box">
-             <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800" alt="Tech" />
-          </div>
-          <div class="gallery__overlay">
-            <h3>Instant Access</h3>
-          </div>
+        <h3 class="quick-link-card__title">Download App</h3>
+        <p class="quick-link-card__desc">Get NBF Instant on your phone</p>
+        <span class="quick-link-card__arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+      <a href="https://nbf.ae" target="_blank" rel="noopener noreferrer" class="quick-link-card">
+        <div class="quick-link-card__icon">
+          <i data-lucide="globe"></i>
         </div>
-        <div class="gallery__item">
-          <div class="gallery__img-box">
-             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="Neon" />
-          </div>
-          <div class="gallery__overlay">
-            <h3>Neon Pulse</h3>
-          </div>
+        <h3 class="quick-link-card__title">nbf.ae</h3>
+        <p class="quick-link-card__desc">Visit our main website</p>
+        <span class="quick-link-card__arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+      <a href="https://nbf.ae/personal/ways-to-bank/internet-banking" target="_blank" rel="noopener noreferrer" class="quick-link-card">
+        <div class="quick-link-card__icon">
+          <i data-lucide="monitor"></i>
         </div>
-        <div class="gallery__item gallery__item--large">
-          <div class="gallery__img-box">
-             <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=1000" alt="Abstract" />
-          </div>
-          <div class="gallery__overlay">
-            <h3>Generation Alpha</h3>
-          </div>
+        <h3 class="quick-link-card__title">Internet Banking</h3>
+        <p class="quick-link-card__desc">Manage your accounts online</p>
+        <span class="quick-link-card__arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+      <a href="tel:+97192221100" class="quick-link-card">
+        <div class="quick-link-card__icon">
+          <i data-lucide="headphones"></i>
         </div>
-      </div>
+        <h3 class="quick-link-card__title">Contact Us</h3>
+        <p class="quick-link-card__desc">We're here to help 24/7</p>
+        <span class="quick-link-card__arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
     </div>
   </section>
 
@@ -393,8 +468,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <span class="nav__logo-nbf">NBF</span>
-            <span class="nav__logo-ajyal">Ajyal</span>
+            <img src="assets/logos/nbf-ajyal-logo-themed.png" alt="NBF Ajyal" class="footer__logo-img">
           </div>
           <p class="footer__tagline">Banking made simple for everyone in the UAE.</p>
         </div>
@@ -421,12 +495,50 @@
           </div>
         </div>
       </div>
+      <div class="footer__apps">
+        <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn--white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn--white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/></svg>
+          Google Play
+        </a>
+        <a href="https://appgallery.huawei.com" target="_blank" rel="noopener noreferrer" class="btn btn--white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2c1.85 0 3.55.63 4.9 1.69L12 12V4zm-6.9 3.31L12 12H4c0-1.85.63-3.55 1.69-4.9l-.59.21zM12 20c-3.56 0-6.58-2.31-7.65-5.5h15.3C18.58 17.69 15.56 20 12 20zm7.65-7.5H12l5.9-5.9A7.96 7.96 0 0 1 20 12c0 .17 0 .34-.02.5h-.33z"/></svg>
+          AppGallery
+        </a>
+      </div>
       <div class="footer__bottom">
         <p>&copy; 2026 National Bank of Fujairah. All rights reserved.</p>
         <p class="footer__disclaimer">NBF Ajyal is a product of National Bank of Fujairah. Licensed by the Central Bank of the UAE.</p>
       </div>
     </div>
   </footer>
+
+  <!-- ========== MOBILE NAV FOOTER ========== -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#benefits" class="mobile-nav__link">
+      <i data-lucide="sparkles"></i>
+      <span>Benefits</span>
+    </a>
+    <a href="#gallery" class="mobile-nav__link">
+      <i data-lucide="credit-card"></i>
+      <span>Cards</span>
+    </a>
+    <a href="#products" class="mobile-nav__link">
+      <i data-lucide="layers"></i>
+      <span>Products</span>
+    </a>
+    <a href="#how-it-works" class="mobile-nav__link">
+      <i data-lucide="list-ordered"></i>
+      <span>How It Works</span>
+    </a>
+    <a href="#faqs" class="mobile-nav__link">
+      <i data-lucide="help-circle"></i>
+      <span>FAQs</span>
+    </a>
+  </nav>
 
   <!-- ========== MODAL SYSTEM ========== -->
   <div class="modal" id="cardModal">
@@ -435,16 +547,40 @@
       <button class="modal__close" id="modalClose">
         <i data-lucide="x"></i>
       </button>
+      <div class="modal__card-slot" id="modalCardSlot"></div>
       <div id="modalData">
         <!-- Content injected by JS -->
       </div>
     </div>
   </div>
 
+  <!-- FAQ Preview Device -->
+  <div class="faq-preview" id="faqPreview">
+    <div class="faq-preview__icon" id="faqPreviewIcon"></div>
+  </div>
+
   <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"></script>
+  <script>
+    if (typeof VANTA !== 'undefined') {
+      VANTA.TOPOLOGY({
+        el: "#hero",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x00E676,
+        backgroundColor: 0x0D0F12
+      });
+    }
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>

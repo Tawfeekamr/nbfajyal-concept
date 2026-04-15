@@ -1,0 +1,11 @@
+<svg width="460" height="120" viewBox="0 0 460 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rounded Tilted Block inspired by DA.png -->
+  <path d="M195 15C195 9.47715 199.477 5 205 5H435C440.523 5 445 9.47715 445 15V105C445 110.523 440.523 115 435 115H195C189.477 115 185 110.523 185 105V15Z" fill="#CCFF00" transform="rotate(-2 230 60) skewX(-10)"/>
+  
+  <!-- "NBF" Branding (Pure White) -->
+  <text x="30" y="85" font-family="'Inter', sans-serif" font-weight="900" font-size="64" fill="#FFFFFF">NBF</text>
+  
+  <!-- "Ajyal" Branding (High Contrast Dark) -->
+  <!-- Centered within the tilted block -->
+  <text x="215" y="85" font-family="'Inter', sans-serif" font-weight="900" font-size="64" fill="#0D0F12">Ajyal</text>
+</svg>

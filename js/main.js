@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // ---- GSAP Setup ----
+  if (window.gsap) {
+    gsap.registerPlugin(ScrollTrigger, Flip);
+  }
+
   // ---- Scroll Progress & Nav effects ----
   const nav = document.getElementById('nav');
   const progressBar = document.createElement('div');
@@ -23,18 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
 
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('nav__links--open');
-    navToggle.classList.toggle('nav__toggle--open');
-  });
-
-  // Close mobile menu when a link is clicked
-  navLinks.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('nav__links--open');
-      navToggle.classList.remove('nav__toggle--open');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('nav__links--open');
+      navToggle.classList.toggle('nav__toggle--open');
     });
-  });
+
+    navLinks.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('nav__links--open');
+        navToggle.classList.remove('nav__toggle--open');
+      });
+    });
+  }
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -79,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
       once: true
     });
 
-    // Hero Parallax effect
-    if (heroScene) {
-      gsap.to(heroScene, {
+    // Hero Parallax effect (Isolated on Visual container)
+    if (heroVisual) {
+      gsap.to(heroVisual, {
         scrollTrigger: {
           trigger: ".hero",
           start: "top top",
@@ -89,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
           scrub: true
         },
         y: 100,
-        rotateX: -10,
         opacity: 0.5
       });
     }
@@ -179,9 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- Card Position Shuffling ----
   const cards = document.querySelectorAll('.card-3d');
   let currentPositions = [0, 1, 2];
+  let shuffleInterval = null;
+  const isMobile = () => window.innerWidth <= 768;
 
   function shuffleCards() {
-    // Continuous: Removed hover check
+    if (modalState.shufflePaused) return;
     currentPositions.unshift(currentPositions.pop());
 
     cards.forEach((card, index) => {
@@ -190,9 +197,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (cards.length > 0) {
-    setInterval(shuffleCards, 4000);
+  function startShuffle() {
+    if (shuffleInterval) clearInterval(shuffleInterval);
+    if (!isMobile() && cards.length > 0) {
+      shuffleInterval = setInterval(shuffleCards, 4000);
+    }
   }
+
+  startShuffle();
+
+  // ---- Mobile Card Slider ----
+  let sliderIndex = 0;
+  let autoSlideInterval = null;
+
+  function updateSlider() {
+    cards.forEach((card, i) => {
+      card.classList.remove('card-3d--slide-active');
+      if (i === sliderIndex) {
+        card.classList.add('card-3d--slide-active');
+      }
+    });
+    // Update dots
+    document.querySelectorAll('.card-slider__dot').forEach((dot, i) => {
+      dot.classList.toggle('card-slider__dot--active', i === sliderIndex);
+    });
+  }
+
+  function nextSlide() {
+    sliderIndex = (sliderIndex + 1) % cards.length;
+    updateSlider();
+  }
+
+  function startAutoSlide() {
+    if (autoSlideInterval) clearInterval(autoSlideInterval);
+    if (isMobile()) {
+      autoSlideInterval = setInterval(nextSlide, 3000);
+    }
+  }
+
+  // Create slider dots
+  if (heroVisual && cards.length > 0) {
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'card-slider__dots';
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'card-slider__dot' + (i === 0 ? ' card-slider__dot--active' : '');
+      dot.setAttribute('aria-label', `Card ${i + 1}`);
+      dot.addEventListener('click', () => {
+        sliderIndex = i;
+        updateSlider();
+      });
+      dotsContainer.appendChild(dot);
+    });
+    heroVisual.appendChild(dotsContainer);
+  }
+
+  function initMobileSlider() {
+    if (isMobile()) {
+      cards.forEach(card => card.classList.remove('card-3d--pos-0', 'card-3d--pos-1', 'card-3d--pos-2'));
+      updateSlider();
+      startAutoSlide();
+    } else {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      cards.forEach(card => card.classList.remove('card-3d--slide-active'));
+      cards.forEach((card, index) => {
+        card.classList.remove('card-3d--pos-0', 'card-3d--pos-1', 'card-3d--pos-2');
+        card.classList.add(`card-3d--pos-${currentPositions[index]}`);
+      });
+    }
+  }
+
+  initMobileSlider();
+
+  // Touch swipe support for slider
+  let touchStartX = 0;
+  if (heroVisual) {
+    heroVisual.addEventListener('touchstart', (e) => {
+      if (!isMobile()) return;
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    heroVisual.addEventListener('touchend', (e) => {
+      if (!isMobile()) return;
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          sliderIndex = (sliderIndex + 1) % cards.length;
+        } else {
+          sliderIndex = (sliderIndex - 1 + cards.length) % cards.length;
+        }
+        updateSlider();
+      }
+    }, { passive: true });
+  }
+
+  window.addEventListener('resize', () => {
+    initMobileSlider();
+    startShuffle();
+  });
 
   // ---- GSAP Spotlight Effect ----
   const benefitsSection = document.querySelector('.benefits');
@@ -219,53 +320,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- Modal System ----
+  // ---- Modal System (3D Card Fly Animation) ----
   const modal = document.getElementById('cardModal');
   const modalData = document.getElementById('modalData');
   const modalClose = document.getElementById('modalClose');
   const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalCardSlot = document.getElementById('modalCardSlot');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const modalState = {
+    isOpen: false,
+    isAnimating: false,
+    currentType: null,
+    originalCard: null,
+    flyingClone: null,
+    shufflePaused: false,
+    openTimeline: null
+  };
+
+  const cardMap = [
+    { selector: '.card-3d--main',   type: 'IslamicInfinite' },
+    { selector: '.card-3d--side-1', type: 'IslamicPlatinum' },
+    { selector: '.card-3d--side-2', type: 'IslamicClassic' }
+  ];
 
   const cardDetails = {
-    'Infinite': {
-      title: 'NBF Infinite Credit Card',
-      subtitle: 'The Ultimate Lifestyle Card',
-      body: 'Experience the pinnacle of banking with the NBF Infinite Credit Card. Designed for high-achievers who demand the best in lifestyle, travel, and security features.',
+    'IslamicInfinite': {
+      title: 'NBF Islamic Infinite Credit Card',
+      subtitle: 'Our Most Prestigious Card',
+      body: 'Our most prestigious card, for those who seek exceptional benefits, enhanced flexibility, and world-class service.',
       perks: [
-        { icon: 'plane', text: 'Unlimited Lounge Access' },
-        { icon: 'shield-check', text: 'Multi-trip Travel Insurance' },
-        { icon: 'clapperboard', text: '50% Off Cinema Tickets' },
-        { icon: 'shopping-bag', text: '2% Unlimited Cashback' }
+        { icon: 'gift', text: 'Earn rewards on every purchase' },
+        { icon: 'utensils', text: '10% cashback on all dining' },
+        { icon: 'plane', text: 'Airport lounge access' },
+        { icon: 'headphones', text: '24/7 Concierge' }
       ]
     },
-    'Exclusive': {
-      title: 'Platinum Exclusive',
-      subtitle: 'Premium Everyday Banking',
-      body: 'Elevate your daily spending with the Platinum Exclusive card. A perfect blend of reward points and premium merchant discounts tailored for your lifestyle.',
+    'IslamicPlatinum': {
+      title: 'NBF Islamic Platinum Debit Card',
+      subtitle: 'Your Gateway to Premium Service',
+      body: 'Your gateway to premium service, exclusive benefits and worldwide acceptance with added convenience.',
       perks: [
-        { icon: 'coffee', text: 'BOGO Lifestyle Offers' },
-        { icon: 'map-pin', text: 'Valet Parking Services' },
-        { icon: 'landmark', text: 'No Annual Fees' },
-        { icon: 'zap', text: 'Instant Approval' }
+        { icon: 'landmark', text: 'Free ATM withdrawals across the UAE' },
+        { icon: 'crown', text: 'Exclusive platinum rewards & privileges' },
+        { icon: 'globe', text: 'Accepted at millions of locations worldwide' }
       ]
     },
-    'Debit': {
-      title: 'Platinum Debit Card',
-      subtitle: 'Control Meets Perks',
-      body: 'Get the freedom of a debit card with the perks of a credit card. Secure, fast, and accepted globally with exclusive online shopping protection.',
+    'IslamicClassic': {
+      title: 'NBF Islamic Classic Debit Card',
+      subtitle: 'Your Key to Effortless Spending',
+      body: 'Your key to effortless spending, accepted at millions of locations worldwide and backed by trusted security.',
       perks: [
-        { icon: 'wallet', text: 'High Daily Limits' },
-        { icon: 'smartphone', text: 'Apple & Google Pay' },
-        { icon: 'globe', text: 'Fee-Free Int. Spending' },
-        { icon: 'lock', text: '3D Secure Protection' }
+        { icon: 'landmark', text: 'Free ATM withdrawals across the UAE' },
+        { icon: 'shield-check', text: 'Secure chip and contactless payments' },
+        { icon: 'users', text: 'Free supplementary cards for family members' }
       ]
     }
   };
 
-  function openModal(type) {
-    console.log('Opening modal for:', type);
-    const data = cardDetails[type];
-    if (!data) return;
-
+  function injectModalContent(data) {
     modalData.innerHTML = `
       <div class="modal__header">
         <span class="modal__subtitle">${data.subtitle}</span>
@@ -281,114 +394,351 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('')}
       </div>
     `;
-
     if (window.lucide) lucide.createIcons();
+  }
+
+  function createClone(cardEl) {
+    const rect = cardEl.getBoundingClientRect();
+    const clone = document.createElement('div');
+    clone.className = 'card-fly-clone';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+    clone.style.backgroundImage = getComputedStyle(cardEl).backgroundImage;
+    clone.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
+    document.body.appendChild(clone);
+    return { clone, rect };
+  }
+
+  function getModalTargetRect() {
+    const targetWidth = Math.min(380, window.innerWidth * 0.85);
+    const targetHeight = targetWidth * (214 / 340);
+    modalCardSlot.style.height = targetHeight + 'px';
+
+    // Temporarily show modal to read layout
+    const prevVisibility = modal.style.visibility;
+    const prevOpacity = modal.style.opacity;
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '0';
+
+    const slotRect = modalCardSlot.getBoundingClientRect();
+
+    modal.style.visibility = prevVisibility;
+    modal.style.opacity = prevOpacity;
+
+    return { left: slotRect.left, top: slotRect.top, width: targetWidth, height: targetHeight };
+  }
+
+  function openModal(type) {
+    if (modalState.isAnimating || modalState.isOpen) return;
+    const data = cardDetails[type];
+    if (!data) return;
+
+    modalState.isAnimating = true;
+    modalState.currentType = type;
+    modalState.shufflePaused = true;
+
+    const cardEntry = cardMap.find(c => c.type === type);
+    const cardEl = document.querySelector(cardEntry.selector);
+    modalState.originalCard = cardEl;
+
+    injectModalContent(data);
+    const targetRect = getModalTargetRect();
+    const { clone, rect: sourceRect } = createClone(cardEl);
+    modalState.flyingClone = clone;
+    cardEl.classList.add('card-3d--hidden');
+
+    // Reduced motion fallback
+    if (prefersReducedMotion) {
+      modal.style.visibility = 'visible';
+      modal.style.opacity = '1';
+      modal.classList.add('modal--open');
+      document.body.style.overflow = 'hidden';
+      modalState.isAnimating = false;
+      modalState.isOpen = true;
+      return;
+    }
+
+    const modalContent = document.querySelector('.modal__content');
+    const contentElements = modalData.querySelectorAll(':scope > *');
+
+    // Calculate scale factors (GPU-friendly, no layout reflow)
+    const scaleX = targetRect.width / sourceRect.width;
+    const scaleY = targetRect.height / sourceRect.height;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        modalState.isAnimating = false;
+        modalState.isOpen = true;
+      }
+    });
+    modalState.openTimeline = tl;
+
+    // Phase 1: Show modal container + backdrop
+    tl.set(modal, { opacity: 0, visibility: 'visible' });
+    tl.to(modal, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0);
     modal.classList.add('modal--open');
+
+    // Phase 2: Clone flies to modal card slot (GPU: translate3d + scale only)
+    tl.to(clone, {
+      borderRadius: '16px',
+      x: targetRect.left,
+      y: targetRect.top,
+      scaleX: scaleX,
+      scaleY: scaleY,
+      duration: 0.6,
+      ease: 'power3.inOut'
+    }, 0.05);
+
+    // Phase 3: Glass card slides up
+    gsap.set(modalContent, { opacity: 0, y: 30, scale: 0.95 });
+    tl.to(modalContent, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.5,
+      ease: 'power2.out'
+    }, 0.35);
+
+    // Phase 4: Text content staggered fade-in
+    gsap.set(contentElements, { opacity: 0, y: 20 });
+    tl.to(contentElements, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.08,
+      duration: 0.4,
+      ease: 'power2.out'
+    }, 0.5);
+
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
-    modal.classList.remove('modal--open');
-    document.body.style.overflow = '';
+    if (modalState.isAnimating && !modalState.isOpen) return;
+    if (!modalState.isOpen) return;
+
+    // Kill any in-progress open animation
+    if (modalState.openTimeline) {
+      modalState.openTimeline.kill();
+      modalState.openTimeline = null;
+    }
+
+    modalState.isAnimating = true;
+
+    const cardEl = modalState.originalCard;
+    const clone = modalState.flyingClone;
+    const modalContent = document.querySelector('.modal__content');
+
+    // Reduced motion fallback
+    if (prefersReducedMotion) {
+      modal.style.visibility = 'hidden';
+      modal.style.opacity = '0';
+      modal.classList.remove('modal--open');
+      document.body.style.overflow = '';
+      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+      cardEl.classList.remove('card-3d--hidden');
+      modalState.flyingClone = null;
+      modalState.isAnimating = false;
+      modalState.isOpen = false;
+      modalState.shufflePaused = false;
+      gsap.set(modalContent, { clearProps: 'all' });
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+        modalState.flyingClone = null;
+        modalState.isAnimating = false;
+        modalState.isOpen = false;
+        modalState.currentType = null;
+        modalState.originalCard = null;
+        modalState.shufflePaused = false;
+
+        modal.style.visibility = 'hidden';
+        modal.style.opacity = '0';
+        modal.classList.remove('modal--open');
+        cardEl.classList.remove('card-3d--hidden');
+        gsap.set(modalContent, { clearProps: 'all' });
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Card scales down slightly + fades
+    tl.to(clone, {
+      opacity: 0,
+      scale: 0.85,
+      y: '+=40',
+      duration: 0.5,
+      ease: 'power3.in'
+    }, 0);
+
+    // Glass content slides down + fades
+    tl.to(modalContent, {
+      opacity: 0,
+      y: 30,
+      scale: 0.96,
+      duration: 0.45,
+      ease: 'power2.in'
+    }, 0.05);
+
+    // Backdrop fades with slight delay
+    tl.to(modal, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.inOut'
+    }, 0.15);
   }
 
-  // Click listeners for cards
-  document.querySelector('.card-3d--main').addEventListener('click', () => openModal('Infinite'));
-  document.querySelector('.card-3d--side-1').addEventListener('click', () => openModal('Exclusive'));
-  document.querySelector('.card-3d--side-2').addEventListener('click', () => openModal('Debit'));
+  // Card click listeners
+  if (heroScene) {
+    heroScene.addEventListener('click', () => {
+      // Desktop: find the front card (pos-0)
+      const frontCard = document.querySelector('.card-3d--pos-0');
+      if (frontCard) {
+        const selector = frontCard.classList.contains('card-3d--main') ? '.card-3d--main'
+          : frontCard.classList.contains('card-3d--side-1') ? '.card-3d--side-1'
+          : '.card-3d--side-2';
+        const entry = cardMap.find(c => c.selector === selector);
+        if (entry) openModal(entry.type);
+      }
+    });
+  }
+
+  // Mobile: click active slider card
+  if (heroVisual) {
+    heroVisual.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      if (e.target.closest('.card-slider__dots')) return;
+      const activeCard = cards[sliderIndex];
+      if (!activeCard) return;
+      const selector = activeCard.classList.contains('card-3d--main') ? '.card-3d--main'
+        : activeCard.classList.contains('card-3d--side-1') ? '.card-3d--side-1'
+        : '.card-3d--side-2';
+      const entry = cardMap.find(c => c.selector === selector);
+      if (entry) openModal(entry.type);
+    });
+  }
 
   modalClose.addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', closeModal);
 
-  // Close on Escape
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
 
-  // ---- Gallery Scrub Animation ----
-  if (window.gsap) {
-    const galleryItems = document.querySelectorAll('.gallery__item');
-    galleryItems.forEach((item) => {
-      const img = item.querySelector('img');
-      if (img) {
-        gsap.fromTo(img, 
-          { scale: 1.3, y: -40 },
-          { 
-            scale: 1, 
-            y: 0,
-            scrollTrigger: {
-              trigger: item,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true
-            }
-          }
-        );
-      }
-    });
-
-    // ---- Gallery Bento Grid Scroll Animation ----
-    const galleryElement = document.querySelector("#gallery-8");
-    if (galleryElement && window.Flip) {
-      let flipCtx;
-      const galleryItems = galleryElement.querySelectorAll(".gallery__item");
-
-      const createGalleryTween = () => {
-        flipCtx && flipCtx.revert();
-        galleryElement.classList.remove("gallery--final");
-
-        flipCtx = gsap.context(() => {
-          galleryElement.classList.add("gallery--final");
-          const flipState = Flip.getState(galleryItems);
-          galleryElement.classList.remove("gallery--final");
-
-          const flip = Flip.to(flipState, {
-            simple: true,
-            ease: "expoScale(1, 5)"
-          });
-
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: galleryElement,
-              start: "center center",
-              end: "+=100%",
-              scrub: true,
-              pin: galleryElement.parentNode
-            }
-          });
-          tl.add(flip);
-          return () => gsap.set(galleryItems, { clearProps: "all" });
-        });
-      };
-
-      createGalleryTween();
-      window.addEventListener("resize", createGalleryTween);
-
-      // Animate the gallery header separately
-      gsap.from(".gallery__header", {
-        scrollTrigger: {
-          trigger: ".gallery-section",
-          start: "top 80%"
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
+  // Reposition flying clone on resize
+  window.addEventListener('resize', () => {
+    if (modalState.isOpen && modalState.flyingClone && !modalState.isAnimating) {
+      const cardEl = modalState.originalCard;
+      const sourceRect = cardEl.getBoundingClientRect();
+      const targetRect = getModalTargetRect();
+      const scaleX = targetRect.width / sourceRect.width;
+      const scaleY = targetRect.height / sourceRect.height;
+      gsap.to(modalState.flyingClone, {
+        x: targetRect.left,
+        y: targetRect.top,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        duration: 0.3,
+        ease: 'power2.out'
       });
     }
+  });
+
+  // ---- FAQ Cursor Tracking ----
+  const faqSection = document.querySelector('.faq');
+  const faqPreview = document.getElementById('faqPreview');
+  const faqPreviewIcon = document.getElementById('faqPreviewIcon');
+
+  if (faqSection && faqPreview) {
+    const movePreview = gsap.quickTo(faqPreview, "x", {duration: 0.35, ease: "power3"}),
+          movePreviewY = gsap.quickTo(faqPreview, "y", {duration: 0.35, ease: "power3"});
+
+    faqSection.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 1024) return;
+      movePreview(e.clientX + 32);
+      movePreviewY(e.clientY);
+    });
+
+    document.querySelectorAll('.faq__item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        if (window.innerWidth <= 1024) return;
+        const iconName = item.getAttribute('data-icon');
+        if (iconName) {
+          faqPreviewIcon.innerHTML = `<i data-lucide="${iconName}"></i>`;
+          if (window.lucide) lucide.createIcons();
+          gsap.to(faqPreview, { opacity: 1, scale: 1, duration: 0.3 });
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(faqPreview, { opacity: 0, scale: 0.8, duration: 0.3 });
+      });
+    });
   }
 
-  // ---- Initialize Lucide Icons (at end, after all DOM setup) ----
+  // ---- Advanced Gallery (Flip Switch) ----
+  const galleryElement = document.querySelector("#gallery-8");
+  if (galleryElement && window.Flip) {
+    let flipCtx;
+    const galleryItems = galleryElement.querySelectorAll(".gallery__item");
+    const galleryOverlays = galleryElement.querySelectorAll(".gallery__overlay");
+
+    const createGalleryTween = () => {
+      // Revert previous context if it exists
+      flipCtx && flipCtx.revert();
+      galleryElement.classList.remove("gallery--final");
+
+      flipCtx = gsap.context(() => {
+        // Capture initial state
+        galleryElement.classList.add("gallery--final");
+        const flipState = Flip.getState(galleryItems);
+        galleryElement.classList.remove("gallery--final");
+
+        const flip = Flip.to(flipState, {
+          simple: true,
+          ease: "none"
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".gallery-wrap",
+            start: "center center",
+            end: "+=200%",
+            scrub: 1.5,
+            pin: window.innerWidth > 768, // Only pin on tablet/desktop
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            enabled: window.innerWidth > 768 // Disable entire scroll effect on mobile
+          }
+        });
+
+        // Phase 1: Grid expands
+        tl.add(flip);
+
+        // Phase 2: Fade in overlay titles
+        tl.fromTo(galleryOverlays, {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.04,
+          duration: 0.5
+        }, "+=0.1");
+
+        return () => gsap.set(galleryItems, { clearProps: "all" });
+      });
+    };
+
+    createGalleryTween();
+    window.addEventListener("resize", createGalleryTween);
+  }
+
+  // ---- Initialize Lucide Icons ----
   function initIcons() {
     if (window.lucide && typeof lucide.createIcons === 'function') {
       lucide.createIcons();
     }
   }
-
-  // Try immediately, then retry after short delay in case CDN is slow
   initIcons();
-  if (!document.querySelector('[data-lucide] svg')) {
-    setTimeout(initIcons, 500);
-    setTimeout(initIcons, 1500);
-  }
 });
