@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide icons
-  if (window.lucide) {
-    lucide.createIcons();
-  }
-
   // ---- Scroll Progress & Nav effects ----
   const nav = document.getElementById('nav');
   const progressBar = document.createElement('div');
@@ -343,5 +338,19 @@ document.addEventListener('DOMContentLoaded', () => {
       duration: 1,
       ease: "power3.out"
     });
+  }
+
+  // ---- Initialize Lucide Icons (at end, after all DOM setup) ----
+  function initIcons() {
+    if (window.lucide && typeof lucide.createIcons === 'function') {
+      lucide.createIcons();
+    }
+  }
+
+  // Try immediately, then retry after short delay in case CDN is slow
+  initIcons();
+  if (!document.querySelector('[data-lucide] svg')) {
+    setTimeout(initIcons, 500);
+    setTimeout(initIcons, 1500);
   }
 });
