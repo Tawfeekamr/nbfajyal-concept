@@ -4,11 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
   }
 
-  // ---- Scroll-based nav border ----
+  // ---- Scroll Progress & Nav effects ----
   const nav = document.getElementById('nav');
+  const progressBar = document.createElement('div');
+  progressBar.className = 'progress-bar';
+  document.body.appendChild(progressBar);
 
   function handleScroll() {
-    if (window.scrollY > 10) {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = scrollPercent + '%';
+
+    if (window.scrollY > 20) {
       nav.classList.add('nav--scrolled');
     } else {
       nav.classList.remove('nav--scrolled');
@@ -52,5 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+  });
+
+  // ---- Intersection Observer for Scroll Reveal ----
+  const revealOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal--visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
   });
 });
