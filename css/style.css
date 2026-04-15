@@ -540,15 +540,15 @@ details summary::-webkit-details-marker {
 }
 
 .card-3d--main {
-  background: linear-gradient(135deg, #1a1e25 0%, #0D0F12 50%, #1a2332 100%);
+  background-image: url('../examples/cards/NBF__Infinite-Credit-Card.png');
 }
 
 .card-3d--side-1 {
-  background: linear-gradient(135deg, #15181C 0%, #0D0F12 50%, #1a1e25 100%);
+  background-image: url('../examples/cards/NBF__Platinum-Exclusive-Credit-Card.png');
 }
 
 .card-3d--side-2 {
-  background: linear-gradient(135deg, #0D0F12 0%, #15181C 50%, #1a2332 100%);
+  background-image: url('../examples/cards/NBF__Platinum-Debit-Card.png');
 }
 
 .hero__glow {
@@ -574,7 +574,6 @@ details summary::-webkit-details-marker {
 .benefits {
   padding: 120px 0;
   position: relative;
-  background: var(--color-dark);
   overflow: hidden;
   --spotlight-x: 50%;
   --spotlight-y: 50%;
@@ -729,7 +728,6 @@ details summary::-webkit-details-marker {
 
 .products {
   padding: var(--space-5xl) 0;
-  background-color: var(--color-dark);
 }
 
 .products__container {
@@ -821,7 +819,6 @@ details summary::-webkit-details-marker {
 
 .steps {
   padding: var(--space-5xl) 0;
-  background-color: var(--color-dark);
 }
 
 .steps__container {
@@ -915,7 +912,6 @@ details summary::-webkit-details-marker {
 
 .stats {
   padding: var(--space-5xl) 0;
-  background-color: var(--color-dark);
   border-top: 1px solid var(--glass-border);
   border-bottom: 1px solid var(--glass-border);
 }
@@ -954,7 +950,6 @@ details summary::-webkit-details-marker {
 /* --- FAQ --- */
 .faq {
   padding: var(--space-5xl) 0;
-  background-color: var(--color-dark);
 }
 
 .faq__container {
@@ -990,7 +985,6 @@ details summary::-webkit-details-marker {
 /* --- CTA --- */
 .cta {
   padding: var(--space-5xl) 0;
-  background: var(--color-dark);
   position: relative;
   overflow: hidden;
 }
@@ -1038,7 +1032,6 @@ details summary::-webkit-details-marker {
 
 .footer {
   padding: var(--space-5xl) 0 var(--space-xl);
-  background-color: var(--color-dark);
   color: var(--color-white);
   border-top: 1px solid var(--glass-border);
 }
