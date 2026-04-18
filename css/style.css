@@ -630,6 +630,16 @@ details summary::-webkit-details-marker {
   transition: all 0.4s ease;
 }
 
+@media (max-width: 1024px) {
+  /* Keep ticker visible on mobile/tablet even when scrolled */
+  .nav--scrolled .ticker {
+    height: 32px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+  }
+}
+
 /* --- Theme Switcher --- */
 .theme-switcher {
   position: relative;
@@ -941,8 +951,8 @@ details summary::-webkit-details-marker {
    3. Benefits
    ============================================================ */
 
-.benefits {
-  padding: 120px 0;
+/* Spotlight Background Effect (applied to sections) */
+.spotlight-section {
   position: relative;
   overflow: hidden;
   --spotlight-x: 50%;
@@ -950,7 +960,11 @@ details summary::-webkit-details-marker {
   --spotlight-opacity: 0;
 }
 
-.benefits::after {
+.benefits {
+  padding: 120px 0;
+}
+
+.spotlight-section::after {
   content: "";
   position: absolute;
   top: 0;
@@ -1875,59 +1889,15 @@ details summary::-webkit-details-marker {
    Responsive — Tablet (max-width: 1024px)
    ============================================================ */
 
+
+
 @media (max-width: 1024px) {
   .section-title {
     font-size: 48px;
     letter-spacing: -1px;
   }
 
-  /* Hamburger menu at 1024px */
-  .nav__links {
-    display: none;
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #0D0F12; /* Solid background for legibility */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2xl);
-    z-index: 2000;
-    padding: var(--space-4xl) 0;
-  }
-
-  .nav__links--open {
-    display: flex;
-  }
-
-  .nav__link {
-    font-size: 24px;
-    font-weight: var(--font-weight-bold);
-  }
-
-  .nav__cta {
-    display: none;
-  }
-
-  .nav__toggle {
-    display: flex;
-  }
-
-  .nav__toggle--open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-
-  .nav__toggle--open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav__toggle--open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
+  /* Hamburger menu at 1024px removed from here and moved to consolidated block at end of file */
 
   .hero__title {
     font-size: 64px;
@@ -2025,8 +1995,20 @@ details summary::-webkit-details-marker {
 
   /* Hero mobile */
   .hero {
-    padding-top: calc(var(--nav-height) + var(--space-2xl));
+    padding-top: calc(var(--nav-height) + var(--space-4xl));
     padding-bottom: var(--space-3xl);
+    text-align: center;
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero::after {
@@ -2054,9 +2036,23 @@ details summary::-webkit-details-marker {
   }
 
   .hero__visual {
-    height: 320px;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin-left: 0;
-    margin-top: var(--space-xl);
+    margin-top: var(--space-lg);
+    width: 100%;
+    order: -1; 
+  }
+
+  .card-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: var(--space-md) !important;
+    width: 100%;
   }
 
   .hero__scene {
@@ -2241,9 +2237,19 @@ details summary::-webkit-details-marker {
     gap: var(--space-sm);
   }
 
-  /* Ticker hidden on mobile to save viewport space */
+  /* Ticker refined for mobile */
   .ticker {
-    display: none;
+    display: flex;
+    height: 32px;
+  }
+
+  .ticker__item {
+    font-size: 10px;
+    padding: 0 var(--space-lg);
+  }
+
+  .ticker__item span {
+    font-size: 14px;
   }
 
   /* Steps mobile */
@@ -2493,7 +2499,7 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .mobile-nav {
     display: flex;
     position: fixed;
@@ -2558,21 +2564,143 @@ details summary::-webkit-details-marker {
     color: var(--color-white);
   }
 
-  /* Hide header nav links and hamburger on mobile */
+  /* Add bottom padding to body so content isn't hidden behind mobile nav */
+  body {
+    padding-bottom: 80px;
+  }
+}
+
+/* ============================================================
+   Consolidated Navigation & Hero Responsive System
+   ============================================================ */
+
+/* Case 1: Desktop (> 1024px) */
+@media (min-width: 1025px) {
+  .nav__links { display: flex; }
+  .nav__toggle, .mobile-nav { display: none !important; }
+}
+
+/* Case 2: Tablet (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .nav__toggle { 
+    display: flex !important; 
+    z-index: 2100 !important; /* Above the overlay */
+  }
+  
   .nav__links {
-    display: none !important;
+    display: none;
+    position: fixed !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+    min-height: 100vh !important; /* Ensure it covers full screen */
+    background: rgba(13, 15, 18, 0.98) !important;
+    backdrop-filter: blur(32px) !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--space-2xl) !important;
+    z-index: 2000 !important;
+    padding: var(--space-4xl) 0 !important;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-20px) scale(0.98) !important; /* Start slightly up and scaled for animation */
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
   }
 
-  .nav__toggle {
-    display: none !important;
+  .nav__links--open {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .nav__link {
+    font-size: 28px !important;
+    font-weight: var(--font-weight-bold) !important;
+    color: var(--color-white) !important;
   }
 
   .nav__cta {
     display: inline-flex !important;
+    margin-right: var(--space-lg) !important;
   }
 
-  /* Add bottom padding to body so content isn't hidden behind mobile nav */
-  body {
-    padding-bottom: 64px;
+  .mobile-nav { display: none !important; }
+  body { padding-bottom: 0 !important; }
+
+  /* Hero & Dots for Tablet */
+  .hero__visual {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: var(--space-xl) !important;
   }
+
+  .card-slider__dots {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 24px !important;
+    position: relative !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  /* Hamburger Animation - Refined for centered X */
+  .nav__toggle--open span:nth-child(1) { 
+    transform: translateY(7px) rotate(45deg) !important; 
+  }
+  .nav__toggle--open span:nth-child(2) { 
+    opacity: 0 !important; 
+  }
+  .nav__toggle--open span:nth-child(3) { 
+    transform: translateY(-7px) rotate(-45deg) !important; 
+  }
+}
+
+/* Case 3: Mobile (<= 640px) */
+@media (max-width: 640px) {
+  .mobile-nav { display: flex !important; }
+
+  /* Hide header links/toggle but show CTA */
+  .nav__links, .nav__toggle { display: none !important; }
+
+  .nav__container {
+    justify-content: space-between !important;
+    padding: 0 var(--space-md) !important;
+  }
+
+  .nav__cta {
+    display: inline-flex !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    margin-right: var(--space-xs) !important;
+  }
+
+  body { padding-bottom: 80px !important; }
+
+  /* Hero & Dots for Mobile */
+  .hero__visual {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: var(--space-lg) !important;
+  }
+  
+  .card-slider__dots {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 20px !important;
+    position: relative !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .section-title { font-size: 32px !important; }
+  .hero__title { font-size: 38px !important; }
+
+  /* Ticker for mobile */
+  .ticker { display: flex !important; height: 28px !important; }
+  .ticker__item { font-size: 9px !important; }
 }

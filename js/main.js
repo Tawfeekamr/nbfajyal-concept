@@ -296,14 +296,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---- GSAP Spotlight Effect ----
-  const benefitsSection = document.querySelector('.benefits');
-  if (benefitsSection) {
-    benefitsSection.addEventListener('mousemove', (e) => {
-      const rect = benefitsSection.getBoundingClientRect();
+  const spotlightSections = document.querySelectorAll('.spotlight-section');
+  spotlightSections.forEach(section => {
+    section.addEventListener('mousemove', (e) => {
+      const rect = section.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       
-      gsap.to(benefitsSection, {
+      gsap.to(section, {
         '--spotlight-x': `${x}%`,
         '--spotlight-y': `${y}%`,
         '--spotlight-opacity': 1,
@@ -312,13 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    benefitsSection.addEventListener('mouseleave', () => {
-      gsap.to(benefitsSection, {
+    section.addEventListener('mouseleave', () => {
+      gsap.to(section, {
         '--spotlight-opacity': 0,
         duration: 0.8
       });
     });
-  }
+  });
 
   // ---- Modal System (3D Card Fly Animation) ----
   const modal = document.getElementById('cardModal');
@@ -563,30 +563,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Card scales down slightly + fades
+    // Capture destination rect (where it flies back to)
+    const destRect = cardEl.getBoundingClientRect();
+
+    // Clone flies back to original container
     tl.to(clone, {
-      opacity: 0,
-      scale: 0.85,
-      y: '+=40',
-      duration: 0.5,
-      ease: 'power3.in'
+      x: destRect.left,
+      y: destRect.top,
+      scaleX: 1,
+      scaleY: 1,
+      borderRadius: '24px', // Standard card radius
+      duration: 0.6,
+      ease: 'power3.inOut'
     }, 0);
 
     // Glass content slides down + fades
     tl.to(modalContent, {
       opacity: 0,
-      y: 30,
-      scale: 0.96,
-      duration: 0.45,
+      y: 40,
+      scale: 0.9,
+      duration: 0.4,
       ease: 'power2.in'
-    }, 0.05);
+    }, 0);
 
-    // Backdrop fades with slight delay
+    // Backdrop fades
     tl.to(modal, {
       opacity: 0,
-      duration: 0.5,
+      duration: 0.4,
       ease: 'power2.inOut'
-    }, 0.15);
+    }, 0.2);
   }
 
   // Card click listeners
