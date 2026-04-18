@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="theme-original">
   <!-- Background Blobs for Animation -->
   <div class="bg-blob bg-blob--1"></div>
   <div class="bg-blob bg-blob--2"></div>
@@ -20,7 +20,7 @@
   <header class="nav" id="nav">
     <div class="nav__container">
       <a href="#" class="nav__logo">
-        <img src="assets/logos/nbf-ajyal-logo-themed.png" alt="NBF Ajyal Logo" class="nav__logo-img">
+        <img src="assets/logos/currnet_nbfajyal_logo.png" alt="NBF Ajyal Logo" class="nav__logo-img">
       </a>
       <nav class="nav__links" id="navLinks">
         <a href="#benefits" class="nav__link">Benefits</a>
@@ -48,6 +48,21 @@
         <a href="#faqs" class="nav__link">FAQs</a>
       </nav>
       <div class="nav__actions">
+        <div class="theme-switcher">
+          <button class="theme-switcher__btn" id="themeBtn" aria-label="Switch Theme">
+            <i data-lucide="palette"></i>
+          </button>
+          <div class="theme-switcher__dropdown" id="themeDropdown">
+             <button class="theme-switcher__option" data-theme="neon">
+               <span class="theme-preview theme-preview--neon"></span>
+               Modern Neon
+             </button>
+             <button class="theme-switcher__option active" data-theme="original">
+               <span class="theme-preview theme-preview--original"></span>
+               Original Brand
+             </button>
+          </div>
+        </div>
         <a href="#cta" class="btn btn--primary nav__cta">Open Account</a>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
           <span></span>
@@ -468,7 +483,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/logos/nbf-ajyal-logo-themed.png" alt="NBF Ajyal" class="footer__logo-img">
+            <img src="assets/logos/currnet_nbfajyal_logo.png" alt="NBF Ajyal" class="footer__logo-img">
           </div>
           <p class="footer__tagline">Banking made simple for everyone in the UAE.</p>
         </div>
@@ -567,7 +582,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"></script>
   <script>
     if (typeof VANTA !== 'undefined') {
-      VANTA.TOPOLOGY({
+      window.vantaBackground = VANTA.TOPOLOGY({
         el: "#hero",
         mouseControls: true,
         touchControls: true,
@@ -576,7 +591,7 @@
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x00E676,
+        color: 0x632D8E,
         backgroundColor: 0x0D0F12
       });
     }

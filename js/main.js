@@ -741,4 +741,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   initIcons();
+
+  // ---- Theme Switcher Logic ----
+  const themeOptions = document.querySelectorAll('.theme-switcher__option');
+  const logoImg = document.querySelector('.nav__logo-img');
+  const footerLogoImg = document.querySelector('.footer__logo-img');
+  
+  const LOGOS = {
+    neon: 'assets/logos/nbf-ajyal-logo-themed.png',
+    original: 'assets/logos/currnet_nbfajyal_logo.png'
+  };
+
+  const VANTA_COLORS = {
+    neon: 0x00E676,
+    original: 0x632D8E
+  };
+
+  function setTheme(theme) {
+    if (theme === 'original') {
+      document.body.classList.add('theme-original');
+    } else {
+      document.body.classList.remove('theme-original');
+    }
+
+    // Update UI
+    themeOptions.forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.theme === theme);
+    });
+
+    // Update Vanta
+    if (window.vantaBackground) {
+      window.vantaBackground.setOptions({
+        color: VANTA_COLORS[theme]
+      });
+    }
+
+    // Update Logos
+    if (logoImg) logoImg.src = LOGOS[theme];
+    if (footerLogoImg) footerLogoImg.src = LOGOS[theme];
+
+    // Persist
+    localStorage.setItem('nbf-theme', theme);
+  }
+
+  themeOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      setTheme(option.dataset.theme);
+    });
+  });
+
+  // Load persisted theme
+  const savedTheme = localStorage.getItem('nbf-theme') || 'original';
+  setTheme(savedTheme);
 });

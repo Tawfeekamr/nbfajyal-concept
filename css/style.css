@@ -11,7 +11,9 @@
   --color-green: #CCFF00;     /* Neon Lime */
   --color-green-neon: #00E676; /* Electric Green */
   --color-green-hover: #B8E600;
-  --color-green-muted: rgba(204, 255, 0, 0.1);
+  --color-green-rgb: 204, 255, 0;
+  --color-neon-rgb: 0, 230, 118;
+  --color-green-muted: rgba(var(--color-green-rgb), 0.1);
 
   /* Colors — Text */
   --color-text-primary: #ffffff;  /* Default to dark-mode first for high-energy */
@@ -53,6 +55,10 @@
   /* Transitions */
   --transition-fast: 200ms cubic-bezier(0.23, 1, 0.32, 1);
   --transition-base: 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-slow: 600ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Color Transition Helper */
+  --theme-transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
 
   /* Gallery Gradients (GreenSock-inspired, NBF-branded) */
   --gs-green: #0ae448;
@@ -70,6 +76,43 @@
   --gradient-emerald-city: linear-gradient(166.9deg, var(--gs-green) 53.19%, #0085d0 107.69%);
   --gradient-summer-fair: linear-gradient(144.02deg, var(--gs-blue) 4.56%, var(--gs-pink) 72.98%);
   --gradient-nbf-lime: linear-gradient(114.41deg, #CCFF00 20.74%, #00E676 65.5%);
+}
+
+/* ============================================================
+   Original Brand Theme Overrides
+   ============================================================ */
+
+body.theme-original {
+  --color-green: #D29D7C;      /* Brand Gold/Copper */
+  --color-green-neon: #632D8E; /* Brand Purple */
+  --color-green-hover: #B38669;
+  --color-green-rgb: 210, 157, 124;
+  --color-neon-rgb: 99, 45, 142;
+  --color-green-muted: rgba(var(--color-green-rgb), 0.15);
+  --gradient-nbf-lime: linear-gradient(114.41deg, #D29D7C 20.74%, #632D8E 65.5%);
+}
+
+body.theme-original .badge {
+  background: var(--color-green-muted);
+  border-color: rgba(var(--color-green-rgb), 0.3);
+  color: var(--color-green);
+}
+
+body.theme-original .btn--primary {
+  box-shadow: 0 0 20px rgba(210, 157, 124, 0.2);
+}
+
+body.theme-original .btn--primary:hover {
+  box-shadow: 0 8px 30px rgba(210, 157, 124, 0.35), 0 0 60px rgba(210, 157, 124, 0.15);
+}
+
+/* Add smooth transitions for variables that change */
+body {
+  transition: background-color 0.4s ease;
+}
+
+.btn, .badge, .nav, .text-gradient, .ticker, .bg-blob, .product-card__accent {
+  transition: var(--theme-transition);
 }
 
 /* ============================================================
@@ -200,7 +243,7 @@ details summary::-webkit-details-marker {
   display: inline-flex;
   padding: 8px 16px;
   background: var(--color-green-muted);
-  border: 1px solid rgba(204, 255, 0, 0.2);
+  border: 1px solid rgba(var(--color-green-rgb), 0.2);
   border-radius: var(--radius-pill);
   font-size: 13px;
   font-weight: var(--font-weight-bold);
@@ -225,7 +268,7 @@ details summary::-webkit-details-marker {
   background: linear-gradient(90deg, var(--color-green) 0%, var(--color-green-neon) 100%);
   z-index: 2001;
   transition: width 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+  box-shadow: 0 0 10px rgba(var(--color-green-rgb), 0.5);
 }
 
 .reveal {
@@ -307,18 +350,18 @@ details summary::-webkit-details-marker {
   background-color: var(--color-green);
   color: var(--color-dark);
   font-weight: var(--font-weight-bold);
-  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+  box-shadow: 0 0 20px rgba(var(--color-green-rgb), 0.2);
 }
 
 .btn--primary:hover {
   background-color: var(--color-green-hover);
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 30px rgba(204, 255, 0, 0.35), 0 0 60px rgba(204, 255, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(var(--color-green-rgb), 0.35), 0 0 60px rgba(var(--color-green-rgb), 0.15);
 }
 
 .btn--primary:active {
   transform: translateY(-1px) scale(0.98);
-  box-shadow: 0 2px 10px rgba(204, 255, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(var(--color-green-rgb), 0.3);
 }
 
 .btn--dark {
@@ -367,7 +410,7 @@ details summary::-webkit-details-marker {
   border-color: var(--color-green);
   color: var(--color-green);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(204, 255, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(var(--color-green-rgb), 0.1);
 }
 
 .btn--white {
@@ -533,7 +576,7 @@ details summary::-webkit-details-marker {
 }
 
 .nav__dropdown-card:hover img {
-  box-shadow: 0 15px 30px rgba(204, 255, 0, 0.2);
+  box-shadow: 0 15px 30px rgba(var(--color-green-rgb), 0.2);
 }
 
 .nav__dropdown-card span {
@@ -585,6 +628,96 @@ details summary::-webkit-details-marker {
   pointer-events: none;
   border: none;
   transition: all 0.4s ease;
+}
+
+/* --- Theme Switcher --- */
+.theme-switcher {
+  position: relative;
+  margin-right: var(--space-md);
+}
+
+.theme-switcher__btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.theme-switcher__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-green);
+  color: var(--color-green);
+  transform: translateY(-2px);
+}
+
+.theme-switcher__dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 200px;
+  background: rgba(13, 15, 18, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.theme-switcher:hover .theme-switcher__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-switcher__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.theme-switcher__option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-white);
+}
+
+.theme-switcher__option.active {
+  background: var(--color-green-muted);
+  color: var(--color-green);
+}
+
+.theme-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.theme-preview--neon {
+  background: linear-gradient(135deg, #CCFF00, #00E676);
+}
+
+.theme-preview--original {
+  background: linear-gradient(135deg, #D29D7C, #632D8E);
 }
 
 .ticker__wrapper {
@@ -826,7 +959,7 @@ details summary::-webkit-details-marker {
   bottom: 0;
   background: radial-gradient(
     600px circle at var(--spotlight-x) var(--spotlight-y),
-    rgba(204, 255, 0, 0.08),
+    rgba(var(--color-green-rgb), 0.08),
     transparent 80%
   );
   opacity: var(--spotlight-opacity);
@@ -1142,7 +1275,7 @@ details summary::-webkit-details-marker {
 .product-card:hover {
   transform: translateY(-6px);
   border-color: var(--color-green);
-  box-shadow: 0 20px 60px rgba(204, 255, 0, 0.08), 0 0 0 1px rgba(204, 255, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(var(--color-green-rgb), 0.08), 0 0 0 1px rgba(var(--color-green-rgb), 0.15);
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -1164,7 +1297,7 @@ details summary::-webkit-details-marker {
 
 /* Featured card — always visible green border */
 .product-card--featured {
-  background: linear-gradient(135deg, rgba(204, 255, 0, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(var(--color-green-rgb), 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
   border: 2px solid var(--color-green);
 }
 
@@ -1185,7 +1318,7 @@ details summary::-webkit-details-marker {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(204, 255, 0, 0.1);
+  background-color: rgba(var(--color-green-rgb), 0.1);
   border-radius: 16px;
   color: var(--color-green);
   flex-shrink: 0;
@@ -1207,7 +1340,7 @@ details summary::-webkit-details-marker {
   font-size: 11px;
   font-weight: var(--font-weight-bold);
   color: var(--color-green);
-  background-color: rgba(204, 255, 0, 0.1);
+  background-color: rgba(var(--color-green-rgb), 0.1);
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   text-transform: uppercase;
@@ -1308,7 +1441,7 @@ details summary::-webkit-details-marker {
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-xl);
-  box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+  box-shadow: 0 0 20px rgba(var(--color-green-rgb), 0.4);
 }
 
 .step__icon {
@@ -1518,7 +1651,7 @@ details summary::-webkit-details-marker {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--color-green);
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(204, 255, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(var(--color-green-rgb), 0.08);
 }
 
 .quick-link-card__icon {
@@ -1527,7 +1660,7 @@ details summary::-webkit-details-marker {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(204, 255, 0, 0.1);
+  background-color: rgba(var(--color-green-rgb), 0.1);
   border-radius: 14px;
   margin-bottom: var(--space-sm);
   color: var(--color-green);
@@ -2322,9 +2455,9 @@ details summary::-webkit-details-marker {
   opacity: 0;
   transform: translate(0, -50%) scale(0.8);
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 12px 30px rgba(204, 255, 0, 0.2);
-  border: 1px solid rgba(204, 255, 0, 0.3);
-  background: rgba(204, 255, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(var(--color-green-rgb), 0.2);
+  border: 1px solid rgba(var(--color-green-rgb), 0.3);
+  background: rgba(var(--color-green-rgb), 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
