@@ -290,6 +290,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  // ---- ScrollSpy (Active Nav Link) ----
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav__link, .mobile-nav__link');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px', // Trigger when section is in top-middle of view
+    threshold: 0
+  };
+
+  const observerCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navItems.forEach(item => {
+          const href = item.getAttribute('href');
+          if (href === `#${id}`) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  sections.forEach(section => observer.observe(section));
+
+  // Handle hero separately if needed (when scrolled back to top)
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 100) {
+      navItems.forEach(item => item.classList.remove('active'));
+    }
+  }, { passive: true });
+
   window.addEventListener('resize', () => {
     initMobileSlider();
     startShuffle();
